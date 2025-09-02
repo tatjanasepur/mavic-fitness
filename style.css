@@ -11,7 +11,7 @@
   --radius: 18px;
   --shadow: 0 10px 25px rgba(0,0,0,.35);
 }
- 
+
 html[data-theme='light'] {
   /* Light (bež) */
   --bg:#e6d2b6;
@@ -24,7 +24,7 @@ html[data-theme='light'] {
   --glass: rgba(0,0,0,0.06);
   --shadow: 0 10px 25px rgba(0,0,0,.15);
 }
- 
+
 /* Reset / base */
 *{box-sizing:border-box}
 html,body{
@@ -36,7 +36,7 @@ html,body{
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 .container{width:min(1200px, 92%); margin:0 auto}
- 
+
 /* Header */
 header.site{
   position:fixed; inset:18px 18px auto 18px; z-index:40;
@@ -58,7 +58,7 @@ header.site{
   background:var(--glass);
 }
 .nav a:hover{background:rgba(255,255,255,.12)}
- 
+
 /* Theme toggle */
 #theme-toggle{
   margin-left:10px; padding:8px 12px;
@@ -66,7 +66,7 @@ header.site{
   font-size:16px; background:var(--glass); color:var(--text);
 }
 #theme-toggle:hover{background:rgba(255,255,255,.15)}
- 
+
 /* Floating CTA */
 .floating-price{
   position:fixed; right:18px; bottom:18px; z-index:50;
@@ -75,7 +75,7 @@ header.site{
   padding:14px 18px; border-radius:999px; box-shadow:0 8px 28px rgba(141,229,255,.35);
 }
 .floating-price:hover{filter:brightness(1.05)}
- 
+
 /* Hero */
 .hero{
   position:relative; height:100vh; display:grid; place-items:center; overflow:hidden;
@@ -97,16 +97,16 @@ header.site{
   font-weight:900; text-transform:uppercase;
 }
 .hero p.lead{margin:0;color:var(--muted);font-size:clamp(14px, 1.9vw, 18px)}
- 
+
 /* Sections */
 .section{padding:72px 0}
 .section .head{display:flex; justify-content:space-between; align-items:end; gap:18px; margin-bottom:28px}
 .section h2{margin:0; font-size:clamp(28px, 4.6vw, 40px); letter-spacing:.02em}
 .section p.desc{margin:0; color:var(--muted); max-width:60ch}
- 
+
 .grid{display:grid; gap:18px}
 .grid.cards{grid-template-columns:repeat(auto-fill, minmax(260px,1fr))}
- 
+
 /* Cards */
 .card{
   background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
@@ -122,11 +122,11 @@ header.site{
 .card h3{margin:6px 0 8px 0}
 .card .cta{margin-top:12px; display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:12px; border:1px solid rgba(255,255,255,.08); background:var(--glass)}
 .card .cta:hover{background:rgba(255,255,255,.12)}
- 
+
 /* Layout splits */
 .split{display:grid; grid-template-columns: 1.2fr .8fr; gap:24px; align-items:start;}
 @media (max-width: 880px){ .split{grid-template-columns: 1fr;} }
- 
+
 /* Pricing */
 .pricing{display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:18px;}
 .price-card{
@@ -138,10 +138,10 @@ header.site{
 .price-card.show{transform:translateY(0);opacity:1}
 .price-tag{font-size:32px; font-weight:900; letter-spacing:.02em}
 .small{color:var(--muted); font-size:14px}
- 
+
 /* Footer */
 footer.site{padding:40px 0 80px 0; color:var(--muted); text-align:center}
- 
+
 /* Instagram list */
 .instagram-list{display:grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap:16px;}
 .ig-card{
@@ -154,7 +154,7 @@ footer.site{padding:40px 0 80px 0; color:var(--muted); text-align:center}
 .ig-card .handle{font-weight:700}
 .ig-card .open{margin-left:auto; padding:8px 12px; border:1px solid rgba(255,255,255,.12); border-radius:10px}
 .ig-card:hover{background:rgba(255,255,255,.12)}
- 
+
 /* “pola–pola” glow senka na hover */
 .ig-card::before{
   content:""; position:absolute; inset:-2px; border-radius:inherit;
@@ -162,7 +162,7 @@ footer.site{padding:40px 0 80px 0; color:var(--muted); text-align:center}
   filter:blur(18px); opacity:0; z-index:-1; transition:.35s;
 }
 .ig-card:hover::before{opacity:.55}
- 
+
 .ig-card img{
   width:56px;height:56px;
   border-radius:50%;
@@ -170,76 +170,7 @@ footer.site{padding:40px 0 80px 0; color:var(--muted); text-align:center}
   background:#fff;
   border:2px solid rgba(255,255,255,.25);
 }
- 
+
 /* Sub hero */
 .hero.sub{height:52vh; place-items:end; padding-bottom:64px}
 .breadcrumb{color:var(--muted)}
-/* === Globalna stabilnost i safe-area === */
-html, body { overflow-x: hidden; }
-body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
- 
-/* iOS dynamic toolbar friendly visina za hero (svh umesto vh) */
-@supports (height: 100svh) {
-  .hero { height: 100svh; }
-  .hero.sub { min-height: 60svh; }
-}
- 
-/* Respectuj “notch”/safe-area na iPhone-u */
-header.site { 
-  inset: calc(12px + env(safe-area-inset-top)) 
-         calc(12px + env(safe-area-inset-right)) 
-         auto 
-         calc(12px + env(safe-area-inset-left));
-}
- 
-/* Fluidna tipografija za naslove – manje skokova između uređaja */
-h1 { font-size: clamp(28px, 6vw, 64px); }
-h2 { font-size: clamp(24px, 4.6vw, 40px); }
- 
-/* Form inputi ≥16px da iOS ne zumira */
-input, textarea, select { font-size: 16px; }
- 
-/* Slike uvek “contain” u krugovima i karticama */
-.ig-card img { width: 56px; height: 56px; object-fit: cover; }
- 
-/* === Breakpoint 1200↓: malo veća širina kontejnera da “diše” na tabletima === */
-@media (max-width: 1200px) {
-  .container { width: min(96%, 1100px); }
-}
- 
-/* === Breakpoint 960↓: header kompresija, reflow navigacije, mreže === */
-@media (max-width: 960px) {
-  header.site { padding: 8px 10px; }
-  .brand img { width: 34px; height: 34px; }
-  .nav { gap: 8px; flex-wrap: wrap; }
-  .nav a { padding: 8px 12px; }
-  #theme-toggle { padding: 6px 10px; }
-  .section { padding: 56px 0; }
-  .grid.cards { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
-}
- 
-/* === Breakpoint 720↓: stack layout, veći tap-targeti, manji insets headera === */
-@media (max-width: 720px) {
-  header.site {
-    inset: calc(10px + env(safe-area-inset-top)) 
-           calc(10px + env(safe-area-inset-right))
-           auto 
-           calc(10px + env(safe-area-inset-left));
-    border-radius: calc(var(--radius) + 4px);
-  }
-  .brand .subtitle { display: none; } /* sačuvaj prostor */
-  .grid.cards { grid-template-columns: 1fr; }
-  .instagram-list { grid-template-columns: 1fr; }
-  .ig-card { padding: 14px; }
-  .ig-card img { width: 52px; height: 52px; }
-  .floating-price { right: 14px; bottom: 14px; padding: 12px 16px; }
-}
- 
-/* === Breakpoint 480↓: maksimalna kompaktnost bez kršenja layouta === */
-@media (max-width: 480px) {
-  .nav a { padding: 7px 10px; }
-  .brand img { width: 30px; height: 30px; }
-  .hero-logo img { width: min(220px, 70vw); }
-  .card { padding: 16px; }
-  .price-card { padding: 18px; }
-}
