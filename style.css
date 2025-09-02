@@ -145,20 +145,30 @@ footer.site{padding:40px 0 80px 0; color:var(--muted); text-align:center}
 /* Instagram list */
 .instagram-list{display:grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap:16px;}
 .ig-card{
+  position:relative;
   border:1px solid rgba(255,255,255,.08); background:var(--glass); padding:18px; border-radius:16px;
   display:flex; align-items:center; gap:14px;
-  transform:translateY(14px); opacity:0; transition:.7s;
+  transform:translateY(14px); opacity:0; transition:.35s;
 }
 .ig-card.show{transform:translateY(0);opacity:1}
 .ig-card .handle{font-weight:700}
 .ig-card .open{margin-left:auto; padding:8px 12px; border:1px solid rgba(255,255,255,.12); border-radius:10px}
 .ig-card:hover{background:rgba(255,255,255,.12)}
+
+/* “pola–pola” glow senka na hover */
+.ig-card::before{
+  content:""; position:absolute; inset:-2px; border-radius:inherit;
+  background:linear-gradient(90deg, var(--accent) 0 50%, var(--accent-2) 50% 100%);
+  filter:blur(18px); opacity:0; z-index:-1; transition:.35s;
+}
+.ig-card:hover::before{opacity:.55}
+
 .ig-card img{
-  width:44px;height:44px;
+  width:56px;height:56px;
   border-radius:50%;
-  border:2px solid var(--accent);
-  background:#fff;
   object-fit:cover;
+  background:#fff;
+  border:2px solid rgba(255,255,255,.25);
 }
 
 /* Sub hero */
