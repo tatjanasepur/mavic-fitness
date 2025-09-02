@@ -2,7 +2,10 @@
 <html lang="sr" data-theme="dark">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0f0f12" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#e6d2b6" media="(prefers-color-scheme: light)">
 <title>MAVIC • Cenovnik</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +16,7 @@
 
 <header class="site">
   <div class="brand">
-    <img id="site-logo" src="assets/logo-dark.png" alt="MAVIC logo" onerror="this.style.display='none'">
+    <img src="assets/logo.png" alt="MAVIC logo" onerror="this.style.display='none'">
     <div>
       <div class="title">MAVIC</div>
       <div class="subtitle">Fitness & Lifestyle</div>
@@ -24,7 +27,6 @@
     <a href="index.html#lokacije">Lokacije</a>
     <a href="pricing.html">Cenovnik</a>
     <a href="contact.html">Kontakt</a>
-    <!-- Dodato toggle dugme -->
     <button id="theme-toggle">☀️</button>
   </nav>
 </header>
@@ -63,6 +65,7 @@
       <p class="small">Mala grupa ili 1-na-1 • Paketi dostupni</p>
     </div>
   </div>
+
   <p class="small" style="margin-top:18px">
     * Cene informativne. Tačne informacije o paketima i popustima dobijate na prijemnom desku odabrane lokacije.
   </p>
@@ -73,8 +76,7 @@
 </footer>
 
 <script src="script.js"></script>
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
+
