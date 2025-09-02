@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MAVIC • Cenovnik</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site">
+  <div class="brand">
+    <img src="assets/logo.png" alt="MAVIC logo" onerror="this.style.display='none'">
+    <div>
+      <div class="title">MAVIC</div>
+      <div class="subtitle">Fitness & Lifestyle</div>
+    </div>
+  </div>
+  <nav class="nav">
+    <a href="index.html#o-nama">O nama</a>
+    <a href="index.html#lokacije">Lokacije</a>
+    <a href="pricing.html">Cenovnik</a>
+    <a href="contact.html">Kontakt</a>
+  </nav>
+</header>
+
+<section class="hero sub">
+  <div class="container">
+    <div class="breadcrumb">Početna / Cenovnik</div>
+    <h1 style="margin-top:10px">Cenovnik</h1>
+    <p class="lead">Planovi članarine i usluga.</p>
+  </div>
+</section>
+
+<main class="container section">
+  <div class="pricing">
+    <div class="price-card">
+      <div class="badge">Mesečno</div>
+      <div class="price-tag">17.500 RSD</div>
+      <p class="small">Neograničen broj treninga • Upotreba kompletne teretane</p>
+    </div>
+
+    <div class="price-card">
+      <div class="badge">Dnevna karta</div>
+      <div class="price-tag">1.800 RSD</div>
+      <p class="small">Jednokratna poseta • Pristup svim zonama</p>
+    </div>
+
+    <div class="price-card">
+      <div class="badge">Personalni trening</div>
+      <div class="price-tag">od 3.500 RSD</div>
+      <p class="small">Individualni rad sa trenerom / paket 10+</p>
+    </div>
+
+    <div class="price-card">
+      <div class="badge">Pilates (reformer)</div>
+      <div class="price-tag">od 5.500 RSD</div>
+      <p class="small">Mala grupa ili 1-na-1 • Paketi dostupni</p>
+    </div>
+  </div>
+  <p class="small" style="margin-top:18px">* Cene informativne. Tačne informacije o paketima i popustima dobijate na prijemnom desku odabrane lokacije.</p>
+</main>
+
+<footer class="site">
+  © <span id="year"></span> MAVIC • Sva prava zadržana
+</footer>
+<script src="script.js"></script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
