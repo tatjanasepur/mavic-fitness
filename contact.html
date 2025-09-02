@@ -11,7 +11,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+
 <style>
+/* ====== (postojeci) kontakt forma stilovi ====== */
 form.contact{
   display:grid; gap:14px; background:var(--glass); padding:22px; border-radius:var(--radius);
   border:1px solid rgba(255,255,255,.08);
@@ -26,9 +28,64 @@ button{
   padding:12px 16px; border:none; border-radius:12px; cursor:pointer; font-weight:700;
   background:linear-gradient(135deg, var(--accent), var(--accent-2)); color:#0b0b0e;
 }
+
+/* ====== hamburger meni – samo za ovu stranicu (ne diraš style.css) ====== */
+.menu-toggle{
+  display:none;              /* desktop: skriveno */
+  margin-left:auto;
+  padding:10px 12px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:12px;
+  background:var(--glass);
+  color:var(--text);
+  font-size:20px; line-height:1;
+  cursor:pointer;
+}
+.menu-toggle:focus-visible{ outline:2px solid var(--accent) }
+
+/* Mobilni panel nav-a */
+@media (max-width: 760px){
+  .menu-toggle{ display:block; }
+
+  /* malo kompaktniji header */
+  header.site{ gap:10px; padding:10px 12px; }
+
+  /* pretvorimo .nav u panel koji se otvara */
+  .nav{
+    position: fixed;
+    top: calc(18px + 56px);
+    right: 18px;
+    left: 18px;
+    display: grid;
+    gap:10px;
+    padding:14px;
+    border-radius:16px;
+    background: linear-gradient(180deg, rgba(20,20,24,.95), rgba(20,20,24,.80));
+    border:1px solid rgba(255,255,255,.10);
+    box-shadow: var(--shadow);
+    transform-origin: top right;
+    transform: scale(.98) translateY(-8px);
+    opacity:0; pointer-events:none;
+    transition: transform .25s ease, opacity .25s ease;
+  }
+  .nav.open{
+    opacity:1; pointer-events:auto;
+    transform: scale(1) translateY(0);
+  }
+  .nav a, .nav .theme{
+    padding:12px 14px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.08);
+    background:var(--glass);
+  }
+
+  /* sakrij plivajuće dugme da ne prekrije panel (opciono) */
+  .floating-price{ display:none; }
+}
 </style>
 </head>
 <body>
+
 <header class="site">
   <div class="brand">
     <img src="assets/logo.png" alt="MAVIC logo" onerror="this.style.display='none'">
@@ -37,12 +94,16 @@ button{
       <div class="subtitle">Fitness & Lifestyle</div>
     </div>
   </div>
-  <nav class="nav">
+
+  <!-- HAMBURGER dugme (vidljivo samo na mobilu) -->
+  <button class="menu-toggle" id="menu-toggle" aria-label="Meni" aria-expanded="false" aria-controls="primary-nav">☰</button>
+
+  <nav class="nav" id="primary-nav">
     <a href="index.html#o-nama">O nama</a>
     <a href="index.html#lokacije">Lokacije</a>
     <a href="pricing.html">Cenovnik</a>
     <a href="contact.html">Kontakt</a>
-    <button id="theme-toggle">☀️</button>
+    <button id="theme-toggle" class="theme">☀️</button>
   </nav>
 </header>
 
@@ -97,7 +158,45 @@ button{
 <footer class="site">
   © <span id="year"></span> MAVIC • Sva prava zadržana
 </footer>
+
+<!-- Tvoj globalni script (tema, animacije) -->
 <script src="script.js"></script>
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+<!-- Mali JS samo za hamburger meni na ovoj stranici -->
+<script>
+  (function(){
+    const btn = document.getElementById('menu-toggle');
+    const nav = document.getElementById('primary-nav');
+    if(!btn || !nav) return;
+
+    function closeOnOutside(e){
+      if(!nav.contains(e.target) && e.target !== btn){
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded','false');
+        document.removeEventListener('click', closeOnOutside);
+      }
+    }
+
+    btn.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      const open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if(open){
+        setTimeout(()=>document.addEventListener('click', closeOnOutside), 0);
+      }
+    });
+
+    // ESC za zatvaranje
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape' && nav.classList.contains('open')){
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded','false');
+      }
+    });
+  })();
+
+  // godina u footeru
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
