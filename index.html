@@ -1,124 +1,111 @@
 <!DOCTYPE html>
-<html lang="sr" data-theme="dark">
+<html lang="sr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MAVIC • Fitness & Lifestyle</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<meta name="description" content="MAVIC • Premium fitness centar i pilates u Beogradu. Belgrade Waterfront, Dedinje 'Palace One'.">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>MAVIC • Fitness & Lifestyle</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- Skip link za pristupačnost -->
+  <a class="skip-link" href="#main">Preskoči na sadržaj</a>
 
-<header class="site">
-  <div class="brand">
-    <img src="assets/logo.png" alt="MAVIC logo" onerror="this.style.display='none'">
-    <div>
-      <div class="title">MAVIC</div>
-      <div class="subtitle">Fitness & Lifestyle</div>
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="/">
+        <span class="brand-logo">MAVIC</span>
+        <span class="brand-sub">Fitness & Lifestyle</span>
+      </a>
+
+      <!-- Toggle teme -->
+      <button class="theme-toggle" id="themeToggle" aria-label="Promeni temu" title="Promeni temu">
+        <!-- ikona se puni iz JS -->
+        <span id="themeIcon" aria-hidden="true">🌙</span>
+      </button>
+
+      <!-- Hamburger -->
+      <button class="burger" id="burgerBtn" aria-label="Meni" aria-expanded="false" aria-controls="siteNav">
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+      </button>
+
+      <!-- Navigacija -->
+      <nav id="siteNav" class="nav" aria-label="Glavna navigacija">
+        <ul>
+          <li><a href="/" aria-current="page">Početna</a></li>
+          <li><a href="/o-nama.html">O nama</a></li>
+          <li><a href="/lokacije.html">Lokacije</a></li>
+          <li><a href="/cenovnik.html" class="btn-primary">Cenovnik</a></li>
+          <li class="only-mobile"><a href="/kontakt.html">Kontakt</a></li>
+        </ul>
+      </nav>
     </div>
-  </div>
-  <nav class="nav">
-    <a href="#o-nama">O nama</a>
-    <a href="#lokacije">Lokacije</a>
-    <a href="pricing.html">Cenovnik</a>
-    <a href="contact.html">Kontakt</a>
-    <button id="theme-toggle">☀️</button>
-  </nav>
-</header>
+  </header>
 
-<a class="floating-price" href="pricing.html">Cenovnik →</a>
+  <main id="main" class="container content">
+    <section class="hero">
+      <h1>Dobrodošli u MAVIC</h1>
+      <p>Poseban fokus na posturu, mobilnost i snažan core.</p>
+      <a class="btn-primary lg" href="/cenovnik.html">Cenovnik →</a>
+    </section>
 
-<section class="hero" id="top">
-  <div class="hero-logo">
-    <img src="assets/logo.png" alt="MAVIC" onerror="this.closest('.hero-logo').innerHTML='<h1>MAVIC</h1><p class=lead>Fitness &amp; Lifestyle</p>'">
-    <h1 style="font-family:'Bebas Neue', sans-serif; letter-spacing:.08em">Fitness &amp; Lifestyle</h1>
-    <p class="lead">Premium iskustvo treninga – dizajnirano za rezultate.</p>
-  </div>
-</section>
-
-<main class="container">
-  <section id="o-nama" class="section">
-    <div class="head">
-      <h2>Luksuzna teretana &amp; pilates</h2>
-      <p class="desc">U MAVIC centrima spajamo performanse, dizajn i vrhunsku uslugu. Naši prostori nude najmoderniju opremu, personalizovane programe i mirnu atmosferu za maksimalan fokus – od snage do mobilnosti i pilatesa.</p>
-    </div>
-
-    <div class="split">
-      <div class="card show">
-        <h3>Šampionska oprema</h3>
-        <p class="small">Selektovana premium oprema za snagu, kondiciju i oporavak. Programi prilagođeni početnicima i naprednim vežbačima.</p>
-      </div>
-      <div class="card show">
-        <h3>Iskustvo bez gužve</h3>
-        <p class="small">Ograničen broj članova po terminu i pažljivo planirani layout prostora. Fokus na formu, progres i privatnost.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="lokacije" class="section">
-    <div class="head">
-      <h2>Lokacije</h2>
-      <p class="desc">Izaberi centar koji ti najviše odgovara. Svaka lokacija ima sopstveni karakter, ali isti MAVIC standard.</p>
-    </div>
-
-    <div class="grid cards">
-      <article class="card">
-        <div class="badge">Premium fitness centar</div>
-        <h3>Belgrade Waterfront</h3>
-        <p class="small">Ikonična lokacija uz reku. Prostran, svetao prostor sa privatnim studijom za pilates.</p>
-        <a class="cta" href="location-bw.html">Otvori lokaciju →</a>
-      </article>
-
-      <article class="card">
-        <div class="badge">Premium fitness centar</div>
-        <h3>Dedinje „Palace One”</h3>
-        <p class="small">Diskretna elegancija i maksimalan komfor. Idealan za personalne treninge i kontrolisan napredak.</p>
-        <a class="cta" href="location-dedinje.html">Otvori lokaciju →</a>
-      </article>
-
-      <article class="card">
-        <div class="badge">Pilates studio</div>
-        <h3>MAVIC Pilates</h3>
-        <p class="small">Savremeni reformer studio sa malim grupama i posebnim fokusom na posturu i mobilnost.</p>
-        <a class="cta" href="location-pilates.html">Otvori lokaciju →</a>
-      </article>
-    </div>
-  </section>
-
-  <section class="section" id="instagram">
-    <div class="head">
+    <section class="cards">
       <h2>Prati nas</h2>
-      <p class="desc">Najnovije objave, rasporedi i motivacija.</p>
-    </div>
-    <div class="instagram-list">
-      <a class="ig-card" href="https://www.instagram.com/mavic_belgrade/" target="_blank" rel="noopener">
-        <img src="assets/ig-bw.png" alt="MAVIC Belgrade profil" width="56" height="56" loading="lazy">
-        <div>
-          <div class="handle">@mavic_belgrade</div>
-          <div class="small">Fitness • Lifestyle • BW</div>
-        </div>
-        <span class="open">Otvori</span>
-      </a>
-      <a class="ig-card" href="https://www.instagram.com/mavic_pilates/" target="_blank" rel="noopener">
-        <img src="assets/ig-pilates.png" alt="MAVIC Pilates profil" width="56" height="56" loading="lazy">
-        <div>
-          <div class="handle">@mavic_pilates</div>
-          <div class="small">Reformer • Core • Postura</div>
-        </div>
-        <span class="open">Otvori</span>
-      </a>
-    </div>
-  </section>
-</main>
+      <p class="muted">Najnovije objave, rasporedi i motivacija.</p>
 
-<footer class="site">
-  © <span id="year"></span> MAVIC • Sva prava zadržana
-</footer>
+      <div class="card-list">
+        <article class="card">
+          <img src="https://via.placeholder.com/64" alt="" class="avatar">
+          <div>
+            <h3>@mavic_belgrade</h3>
+            <p class="muted">Fitness • Lifestyle • BW</p>
+          </div>
+          <a class="btn" href="https://instagram.com/mavic_belgrade" target="_blank" rel="noopener">Otvori</a>
+        </article>
 
-<script src="script.js"></script>
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+        <article class="card">
+          <img src="https://via.placeholder.com/64" alt="" class="avatar">
+          <div>
+            <h3>@mavic_pilates</h3>
+            <p class="muted">Reformer • Core • Postura</p>
+          </div>
+          <a class="btn" href="https://instagram.com/mavic_pilates" target="_blank" rel="noopener">Otvori</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="contact-preview">
+      <h2>KONTAKT</h2>
+      <p>Pošaljite upit – odgovaramo u najkraćem roku.</p>
+
+      <form class="form">
+        <label>
+          <span>Ime i prezime</span>
+          <input type="text" placeholder="Vaše ime" required>
+        </label>
+        <label>
+          <span>E-mail</span>
+          <input type="email" placeholder="email@primer.rs" required>
+        </label>
+        <label>
+          <span>Poruka</span>
+          <textarea rows="4" placeholder="Napišite poruku…"></textarea>
+        </label>
+        <button class="btn-primary" type="submit">Pošalji</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container foot-row">
+      <small>© 2025 MAVIC • Sva prava zadržana</small>
+      <a class="btn-pill" href="/cenovnik.html">Cenovnik →</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
