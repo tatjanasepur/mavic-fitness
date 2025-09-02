@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MAVIC • Dedinje „Palace One”</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site">
+  <div class="brand">
+    <img src="assets/logo.png" alt="MAVIC logo" onerror="this.style.display='none'">
+    <div>
+      <div class="title">MAVIC</div>
+      <div class="subtitle">Fitness & Lifestyle</div>
+    </div>
+  </div>
+  <nav class="nav">
+    <a href="index.html#o-nama">O nama</a>
+    <a href="index.html#lokacije">Lokacije</a>
+    <a href="pricing.html">Cenovnik</a>
+    <a href="contact.html">Kontakt</a>
+  </nav>
+</header>
+
+<a class="floating-price" href="pricing.html">Cenovnik →</a>
+
+<section class="hero sub">
+  <div class="container">
+    <div class="breadcrumb">Početna / Lokacije / Dedinje „Palace One”</div>
+    <h1 style="margin-top:10px">Dedinje „Palace One”</h1>
+    <p class="lead">Diskretna elegancija i privatnost</p>
+  </div>
+</section>
+
+<main class="container section">
+  <div class="split">
+    <div class="card show">
+      <h3>Opis</h3>
+      <p class="small">Ekskluzivna lokacija prilagođena personalnim treninzima i naprednoj programaciji. Fokus na formu, progres i oporavak.</p>
+    </div>
+    <div class="card show">
+      <h3>Lokacija</h3>
+      <p class="small">Belgrade • Srbija</p>
+      <a class="cta" href="https://maps.google.com" target="_blank" rel="noopener">Prikaži na mapi →</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  © <span id="year"></span> MAVIC • Sva prava zadržana
+</footer>
+<script src="script.js"></script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
