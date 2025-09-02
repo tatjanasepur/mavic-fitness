@@ -1,43 +1,61 @@
-// Reveal animacije
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('show');
-      observer.unobserve(entry.target);
-    }
-  });
-},{ threshold: 0.16 });
+// ---- Tema ----
+const root = document.documentElement;
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
 
-document.querySelectorAll('.card, .price-card, .ig-card').forEach(el => observer.observe(el));
+function setIcon() {
+  const isLight = root.classList.contains('light');
+  themeIcon.textContent = isLight ? '🌙' : '☀️';
+  themeToggle.setAttribute('aria-pressed', String(isLight));
+}
 
-// Smooth scroll za #ankere
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
+function applyInitialTheme() {
+  const saved = localStorage.getItem('theme'); // 'light' | 'dark' | null
+  if (saved === 'light') root.classList.add('light');
+  else if (saved === 'dark') root.classList.remove('light'); // ostaje dark varijanta
+  else {
+    // koristimo sistemsku preferencu
+    const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    if (prefersLight) root.classList.add('light');
+  }
+  setIcon();
+}
+
+themeToggle.addEventListener('click', () => {
+  root.classList.toggle('light');
+  const mode = root.classList.contains('light') ? 'light' : 'dark';
+  localStorage.setItem('theme', mode);
+  setIcon();
 });
 
-// Dark / Light toggle (globalno)
-document.addEventListener('DOMContentLoaded', () => {
-  const toggle = document.getElementById('theme-toggle');
-  const saved = localStorage.getItem('theme') || 'dark';
+applyInitialTheme();
 
-  function applyTheme(theme){
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-    if (toggle) toggle.textContent = theme === 'light' ? '🌙' : '☀️';
+// ---- Hamburger meni ----
+const burgerBtn = document.getElementById('burgerBtn');
+const nav = document.getElementById('siteNav');
+
+burgerBtn.addEventListener('click', () => {
+  const isOpen = nav.classList.toggle('open');
+  burgerBtn.setAttribute('aria-expanded', String(isOpen));
+  document.body.style.overflow = isOpen ? 'hidden' : ''; // lock scroll na mobilnom
+});
+
+// zatvori meni kada se klikne na link
+nav.addEventListener('click', (e) => {
+  const a = e.target.closest('a');
+  if (!a) return;
+  if (nav.classList.contains('open')) {
+    nav.classList.remove('open');
+    burgerBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
   }
+});
 
-  applyTheme(saved);
-
-  if (toggle){
-    toggle.addEventListener('click', () => {
-      const now = document.documentElement.getAttribute('data-theme') || 'dark';
-      applyTheme(now === 'light' ? 'dark' : 'light');
-    });
+// fallback: zatvaranje na escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && nav.classList.contains('open')) {
+    nav.classList.remove('open');
+    burgerBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
   }
 });
