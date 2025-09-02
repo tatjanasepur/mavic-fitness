@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MAVIC • Kontakt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+form.contact{
+  display:grid; gap:14px; background:var(--glass); padding:22px; border-radius:var(--radius);
+  border:1px solid rgba(255,255,255,.08);
+}
+.input{display:flex; flex-direction:column; gap:6px}
+input, textarea{
+  background:#111218; color:var(--text); border:1px solid rgba(255,255,255,.12);
+  border-radius:12px; padding:12px 14px; outline:none;
+}
+textarea{min-height:140px; resize:vertical}
+button{
+  padding:12px 16px; border:none; border-radius:12px; cursor:pointer; font-weight:700;
+  background:linear-gradient(135deg, var(--accent), var(--accent-2)); color:#0b0b0e;
+}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="brand">
+    <img src="assets/logo.png" alt="MAVIC logo" onerror="this.style.display='none'">
+    <div>
+      <div class="title">MAVIC</div>
+      <div class="subtitle">Fitness & Lifestyle</div>
+    </div>
+  </div>
+  <nav class="nav">
+    <a href="index.html#o-nama">O nama</a>
+    <a href="index.html#lokacije">Lokacije</a>
+    <a href="pricing.html">Cenovnik</a>
+    <a href="contact.html">Kontakt</a>
+  </nav>
+</header>
+
+<section class="hero sub">
+  <div class="container">
+    <div class="breadcrumb">Početna / Kontakt</div>
+    <h1 style="margin-top:10px">Kontakt</h1>
+    <p class="lead">Pošaljite upit – odgovaramo u najkraćem roku.</p>
+  </div>
+</section>
+
+<main class="container section">
+  <div class="split">
+    <form class="contact" method="POST" action="mailto:info@mavicfit.rs" enctype="text/plain">
+      <div class="input">
+        <label for="name">Ime i prezime</label>
+        <input type="text" id="name" name="Ime" required>
+      </div>
+      <div class="input">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="Email" required>
+      </div>
+      <div class="input">
+        <label for="message">Poruka</label>
+        <textarea id="message" name="Poruka" placeholder="Zanima me članarina / raspored / treneri…"></textarea>
+      </div>
+      <button type="submit">Pošalji</button>
+      <p class="small">* Možete podesiti slanje preko servisa kao što je Formspree ili Netlify Forms za profesionalni kontakt.</p>
+    </form>
+
+    <div>
+      <div class="card show">
+        <h3>Instagram</h3>
+        <p class="small">Najbrža komunikacija i aktuelnosti:</p>
+        <div class="instagram-list">
+          <a class="ig-card show" href="https://www.instagram.com/mavic_belgrade/" target="_blank" rel="noopener">
+            <img src="assets/logo.png" alt="IG" width="44" height="44" style="border-radius:10px">
+            <div><div class="handle">@mavic_belgrade</div><div class="small">Belgrade Waterfront</div></div>
+            <span class="open">Otvori</span>
+          </a>
+          <a class="ig-card show" href="https://www.instagram.com/mavic_pilates/" target="_blank" rel="noopener">
+            <img src="assets/logo.png" alt="IG" width="44" height="44" style="border-radius:10px">
+            <div><div class="handle">@mavic_pilates</div><div class="small">Pilates studio</div></div>
+            <span class="open">Otvori</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  © <span id="year"></span> MAVIC • Sva prava zadržana
+</footer>
+<script src="script.js"></script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
