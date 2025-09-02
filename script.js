@@ -1,4 +1,4 @@
-// Reveal animacije
+// Intersection Observer for reveal animations
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -6,38 +6,22 @@ const observer = new IntersectionObserver((entries) => {
       observer.unobserve(entry.target);
     }
   });
-},{ threshold: 0.16 });
+},{threshold: .16});
 
 document.querySelectorAll('.card, .price-card, .ig-card').forEach(el => observer.observe(el));
 
-// Smooth scroll za #ankere
+// Loader effect for hero logo (fallback to CSS already animating)
+window.addEventListener('load', () => {
+  document.body.classList.add('ready');
+});
+
+// Smooth scroll for internal links
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const target = document.querySelector(a.getAttribute('href'));
     if (target) {
       e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      target.scrollIntoView({behavior:'smooth', block:'start'});
     }
   });
-});
-
-// Dark / Light toggle (globalno)
-document.addEventListener('DOMContentLoaded', () => {
-  const toggle = document.getElementById('theme-toggle');
-  const saved = localStorage.getItem('theme') || 'dark';
-
-  function applyTheme(theme){
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-    if (toggle) toggle.textContent = theme === 'light' ? '🌙' : '☀️';
-  }
-
-  applyTheme(saved);
-
-  if (toggle){
-    toggle.addEventListener('click', () => {
-      const now = document.documentElement.getAttribute('data-theme') || 'dark';
-      applyTheme(now === 'light' ? 'dark' : 'light');
-    });
-  }
 });
