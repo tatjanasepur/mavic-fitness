@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 <header class="site">
   <div class="brand">
     <img src="assets/logo.png" alt="MAVIC logo" onerror="this.style.display='none'">
@@ -21,12 +22,16 @@
       <div class="subtitle">Fitness & Lifestyle</div>
     </div>
   </div>
-  <nav class="nav">
+
+  <!-- Hamburger (mobilni) -->
+  <button class="menu-toggle" id="menu-toggle" aria-label="Meni" aria-expanded="false" aria-controls="primary-nav">☰</button>
+
+  <nav class="nav" id="primary-nav">
     <a href="index.html#o-nama">O nama</a>
     <a href="index.html#lokacije">Lokacije</a>
     <a href="pricing.html">Cenovnik</a>
     <a href="contact.html">Kontakt</a>
-    <button id="theme-toggle">☀️</button>
+    <button id="theme-toggle" class="theme">☀️</button>
   </nav>
 </header>
 
@@ -57,7 +62,10 @@
 <footer class="site">
   © <span id="year"></span> MAVIC • Sva prava zadržana
 </footer>
+
 <script src="script.js"></script>
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
