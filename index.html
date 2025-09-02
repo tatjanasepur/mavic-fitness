@@ -14,7 +14,8 @@
 
 <header class="site">
   <div class="brand">
-    <img src="assets/logo.png" alt="MAVIC logo" onerror="this.style.display='none'">
+    <!-- Ako želiš da se logo menja sa temom, koristi id="site-logo" + script.js iz prethodne poruke -->
+    <img id="site-logo" src="assets/logo-dark.png" alt="MAVIC logo" onerror="this.style.display='none'">
     <div>
       <div class="title">MAVIC</div>
       <div class="subtitle">Fitness & Lifestyle</div>
@@ -33,7 +34,7 @@
 
 <section class="hero" id="top">
   <div class="hero-logo">
-    <img src="assets/logo.png" alt="MAVIC" onerror="this.closest('.hero-logo').innerHTML='<h1>MAVIC</h1><p class=lead>Fitness &amp; Lifestyle</p>'">
+    <img src="assets/logo-dark.png" alt="MAVIC" onerror="this.closest('.hero-logo').innerHTML='<h1>MAVIC</h1><p class=lead>Fitness &amp; Lifestyle</p>'">
     <h1 style="font-family:'Bebas Neue', sans-serif; letter-spacing:.08em">Fitness &amp; Lifestyle</h1>
     <p class="lead">Premium iskustvo treninga – dizajnirano za rezultate.</p>
   </div>
@@ -122,4 +123,3 @@
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
-
