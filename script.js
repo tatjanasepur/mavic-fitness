@@ -10,12 +10,12 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.card, .price-card, .ig-card').forEach(el => observer.observe(el));
 
-// Loader effect for hero logo (fallback to CSS already animating)
+// Loader effect
 window.addEventListener('load', () => {
   document.body.classList.add('ready');
 });
 
-// Smooth scroll for internal links
+// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const target = document.querySelector(a.getAttribute('href'));
@@ -25,3 +25,20 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     }
   });
 });
+
+// Theme toggle
+const toggle = document.getElementById('theme-toggle');
+if (toggle) {
+  toggle.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme') || 'dark';
+    const next = current === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    toggle.textContent = next === 'light' ? '🌙' : '☀️';
+  });
+
+  // On load restore theme
+  const saved = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  toggle.textContent = saved === 'light' ? '🌙' : '☀️';
+}
