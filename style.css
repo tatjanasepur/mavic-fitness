@@ -155,4 +155,10 @@ footer.site{padding:40px 0 80px 0; color:var(--muted); text-align:center}
 
 .hero.sub{height:52vh; place-items:end; padding-bottom:64px}
 .breadcrumb{color:var(--muted)}
+.ig-card img {
+  border-radius:50%;
+  border:2px solid var(--accent);
+  background:#fff;
+  object-fit:cover;
+}
 
