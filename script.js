@@ -1,4 +1,4 @@
-// Intersection Observer for reveal animations
+// === Reveal animacije (kartice, IG, cenovnik) ===
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -6,29 +6,31 @@ const observer = new IntersectionObserver((entries) => {
       observer.unobserve(entry.target);
     }
   });
-},{threshold: .16});
+}, { threshold: 0.16 });
 
 document.querySelectorAll('.card, .price-card, .ig-card').forEach(el => observer.observe(el));
 
-// Loader effect
-window.addEventListener('load', () => {
-  document.body.classList.add('ready');
-});
-
-// Smooth scroll
+// === Smooth scroll za interne linkove ===
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const target = document.querySelector(a.getAttribute('href'));
     if (target) {
       e.preventDefault();
-      target.scrollIntoView({behavior:'smooth', block:'start'});
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
 });
 
-// Theme toggle
-const toggle = document.getElementById('theme-toggle');
-if (toggle) {
+// === Dark / Light mode toggle ===
+document.addEventListener('DOMContentLoaded', () => {
+  const toggle = document.getElementById('theme-toggle');
+  if (!toggle) return;
+
+  // Pročitaj prethodni izbor ili podesi na dark
+  const saved = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  toggle.textContent = saved === 'light' ? '🌙' : '☀️';
+
   toggle.addEventListener('click', () => {
     const current = document.documentElement.getAttribute('data-theme') || 'dark';
     const next = current === 'light' ? 'dark' : 'light';
@@ -36,9 +38,4 @@ if (toggle) {
     localStorage.setItem('theme', next);
     toggle.textContent = next === 'light' ? '🌙' : '☀️';
   });
-
-  // On load restore theme
-  const saved = localStorage.getItem('theme') || 'dark';
-  document.documentElement.setAttribute('data-theme', saved);
-  toggle.textContent = saved === 'light' ? '🌙' : '☀️';
-}
+});
