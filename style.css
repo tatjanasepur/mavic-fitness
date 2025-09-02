@@ -174,3 +174,47 @@ footer.site{padding:40px 0 80px 0; color:var(--muted); text-align:center}
 /* Sub hero */
 .hero.sub{height:52vh; place-items:end; padding-bottom:64px}
 .breadcrumb{color:var(--muted)}
+/* === Hamburger meni (globalno) === */
+.menu-toggle{
+  display:none;              /* desktop: skriveno */
+  margin-left:auto;
+  padding:10px 12px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:12px;
+  background:var(--glass);
+  color:var(--text);
+  font-size:20px; line-height:1;
+  cursor:pointer;
+}
+.menu-toggle:focus-visible{ outline:2px solid var(--accent) }
+
+/* Mobilni panel nav-a */
+@media (max-width: 760px){
+  .menu-toggle{ display:block; }
+
+  header.site{ gap:10px; padding:10px 12px; }
+
+  .nav{
+    position: fixed;
+    top: calc(18px + 56px);   /* ispod headera */
+    right: 18px;
+    left: 18px;
+    display: grid;
+    gap:10px;
+    padding:14px;
+    border-radius:16px;
+    background: linear-gradient(180deg, var(--bg-elev), color-mix(in oklab, var(--bg-elev), transparent 20%));
+    border:1px solid rgba(255,255,255,.10);
+    box-shadow: var(--shadow);
+    transform-origin: top right;
+    transform: scale(.98) translateY(-8px);
+    opacity:0; pointer-events:none;
+    transition: transform .25s ease, opacity .25s ease;
+  }
+  .nav.open{
+    opacity:1; pointer-events:auto;
+    transform: scale(1) translateY(0);
+  }
+
+  .nav a, .n
+
