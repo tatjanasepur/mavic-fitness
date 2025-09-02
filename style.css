@@ -1,260 +1,245 @@
-/* --- Reset & base --- */
-* { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
 :root {
-  /* Svetla tema */
-  --bg: #0f1115;
-  --surface: #171a21;
-  --elev: #1e2330;
-  --text: #e9edf2;
-  --muted: #98a2b3;
-  --brand: #88aaff;
-  --brand-2: #bda7ff;
-  --ring: 0 0 0 3px rgba(136,170,255,.35);
-  --radius: 14px;
+  /* Dark (default) */
+  --bg:#0f0f12;
+  --bg-elev:#14151a;
+  --text:#f2f2f5;
+  --muted:#a5a7ad;
+  --accent:#8de5ff; /* icy cyan */
+  --accent-2:#9b8cff; /* soft purple */
+  --card:#17181f;
+  --glass: rgba(255,255,255,0.06);
+  --radius: 18px;
+  --shadow: 0 10px 25px rgba(0,0,0,.35);
 }
-
-:root.light {
-  --bg: #f7f8fb;
-  --surface: #ffffff;
-  --elev: #ffffff;
-  --text: #0f1115;
-  --muted: #5b667a;
-  --brand: #3256ff;
-  --brand-2: #7a47ff;
-  --ring: 0 0 0 3px rgba(50,86,255,.3);
+ 
+html[data-theme='light'] {
+  /* Light (bež) */
+  --bg:#e6d2b6;
+  --bg-elev:#f2e6d9;
+  --text:#1a1a1a;
+  --muted:#4a4a4a;
+  --accent:#9b8cff;
+  --accent-2:#8de5ff;
+  --card:#fff3e4;
+  --glass: rgba(0,0,0,0.06);
+  --shadow: 0 10px 25px rgba(0,0,0,.15);
 }
-
-@media (prefers-color-scheme: light) {
-  :root:not(.dark) { color-scheme: light; }
+ 
+/* Reset / base */
+*{box-sizing:border-box}
+html,body{
+  margin:0;padding:0;height:100%;
+  scroll-behavior:smooth;
+  background:var(--bg);color:var(--text);
+  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
 }
-@media (prefers-color-scheme: dark) {
-  :root:not(.light) { color-scheme: dark; }
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.container{width:min(1200px, 92%); margin:0 auto}
+ 
+/* Header */
+header.site{
+  position:fixed; inset:18px 18px auto 18px; z-index:40;
+  display:flex; align-items:center; justify-content:space-between;
+  background:linear-gradient(180deg, rgba(20,20,24,.85), rgba(20,20,24,.55));
+  backdrop-filter: blur(10px);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:calc(var(--radius) + 6px);
+  padding:10px 14px;
+  box-shadow: var(--shadow);
 }
-
-body {
-  margin: 0;
-  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.5;
+.brand{display:flex; align-items:center; gap:12px}
+.brand img{width:40px;height:40px;border-radius:10px;object-fit:cover}
+.brand .title{font-weight:800;letter-spacing:.08em}
+.brand .subtitle{font-size:12px;color:var(--muted);margin-top:-2px}
+.nav{display:flex; gap:10px; align-items:center}
+.nav a{
+  padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.08);
+  background:var(--glass);
 }
-
-/* safe-area for iOS */
-.site-header, .site-footer {
-  padding-left: max(16px, env(safe-area-inset-left));
-  padding-right: max(16px, env(safe-area-inset-right));
+.nav a:hover{background:rgba(255,255,255,.12)}
+ 
+/* Theme toggle */
+#theme-toggle{
+  margin-left:10px; padding:8px 12px;
+  border:none; border-radius:10px; cursor:pointer;
+  font-size:16px; background:var(--glass); color:var(--text);
 }
-
-.container {
-  width: min(1100px, 100%);
-  margin: 0 auto;
-  padding: 0 16px;
+#theme-toggle:hover{background:rgba(255,255,255,.15)}
+ 
+/* Floating CTA */
+.floating-price{
+  position:fixed; right:18px; bottom:18px; z-index:50;
+  background:linear-gradient(135deg, var(--accent), var(--accent-2));
+  color:#0b0b0e; font-weight:800; letter-spacing:.05em;
+  padding:14px 18px; border-radius:999px; box-shadow:0 8px 28px rgba(141,229,255,.35);
 }
-
-/* --- Skip link --- */
-.skip-link {
-  position: absolute;
-  left: -9999px;
+.floating-price:hover{filter:brightness(1.05)}
+ 
+/* Hero */
+.hero{
+  position:relative; height:100vh; display:grid; place-items:center; overflow:hidden;
+  background: url('assets/hero-mavic.png') center/cover no-repeat, linear-gradient(180deg, #0b0c10, #0f1117 40%, #0f0f12);
 }
-.skip-link:focus {
-  left: 16px; top: 16px;
-  background: var(--surface);
-  color: var(--text);
-  padding: 8px 12px;
-  border-radius: 8px;
-  box-shadow: var(--ring);
-  z-index: 10000;
+.hero::after{
+  content:""; position:absolute; inset:-2px;
+  background: url('assets/noise.png'), linear-gradient(180deg, transparent 0%, rgba(255,255,255,.06) 120%);
+  opacity:.5; mix-blend:overlay; pointer-events:none;
 }
-
-/* --- Header / brand --- */
-.site-header {
-  position: sticky;
-  top: 0;
-  backdrop-filter: saturate(180%) blur(8px);
-  background: color-mix(in oklab, var(--bg) 85%, transparent);
-  border-bottom: 1px solid rgba(255,255,255,.06);
-  z-index: 999;
+.hero-logo{
+  display:flex; flex-direction:column; align-items:center; gap:16px; text-align:center;
+  transform: translateY(10px); opacity:0; animation:enter 1.2s .25s both cubic-bezier(.2,.7,.1,1);
 }
-.header-row {
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  align-items: center;
-  gap: 12px;
-  min-height: 64px;
+@keyframes enter{from{transform:translateY(18px) scale(.98); opacity:0} to{transform:translateY(0) scale(1); opacity:1}}
+.hero-logo img{width:min(260px, 60vw); filter:drop-shadow(0 10px 30px rgba(0,0,0,.6))}
+.hero h1{
+  margin:0;font-size:clamp(34px, 6vw, 64px); line-height:1.02; letter-spacing:.07em;
+  font-weight:900; text-transform:uppercase;
 }
-
-.brand {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 10px;
-  text-decoration: none;
-  color: var(--text);
+.hero p.lead{margin:0;color:var(--muted);font-size:clamp(14px, 1.9vw, 18px)}
+ 
+/* Sections */
+.section{padding:72px 0}
+.section .head{display:flex; justify-content:space-between; align-items:end; gap:18px; margin-bottom:28px}
+.section h2{margin:0; font-size:clamp(28px, 4.6vw, 40px); letter-spacing:.02em}
+.section p.desc{margin:0; color:var(--muted); max-width:60ch}
+ 
+.grid{display:grid; gap:18px}
+.grid.cards{grid-template-columns:repeat(auto-fill, minmax(260px,1fr))}
+ 
+/* Cards */
+.card{
+  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--radius);
+  padding:18px; position:relative; overflow:hidden;
+  transform:translateY(18px); opacity:0;
+  transition:transform .7s cubic-bezier(.2,.7,.1,1), opacity .7s;
 }
-.brand-logo {
-  display: inline-block;
-  font-weight: 800;
-  letter-spacing: .6px;
-  background: linear-gradient(120deg, var(--brand), var(--brand-2));
-  -webkit-background-clip: text; background-clip: text;
-  color: transparent;
-  font-size: 22px;
+.card.show{transform:translateY(0);opacity:1}
+.card:hover{transform:translateY(-4px) scale(1.01)}
+.card .badge{font-size:12px;color:var(--muted)}
+.card h3{margin:6px 0 8px 0}
+.card .cta{margin-top:12px; display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:12px; border:1px solid rgba(255,255,255,.08); background:var(--glass)}
+.card .cta:hover{background:rgba(255,255,255,.12)}
+ 
+/* Layout splits */
+.split{display:grid; grid-template-columns: 1.2fr .8fr; gap:24px; align-items:start;}
+@media (max-width: 880px){ .split{grid-template-columns: 1fr;} }
+ 
+/* Pricing */
+.pricing{display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:18px;}
+.price-card{
+  background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--radius); padding:22px;
+  transform:translateY(16px); opacity:0; transition:.7s;
 }
-.brand-sub { font-size: 12px; color: var(--muted); }
-
-/* --- Theme toggle --- */
-.theme-toggle {
-  appearance: none;
-  border: 1px solid rgba(255,255,255,.08);
-  background: var(--surface);
-  color: var(--text);
-  width: 44px; height: 44px;
-  border-radius: 12px;
-  display: grid; place-items: center;
-  cursor: pointer;
-  z-index: 1001; /* iznad menija */
+.price-card.show{transform:translateY(0);opacity:1}
+.price-tag{font-size:32px; font-weight:900; letter-spacing:.02em}
+.small{color:var(--muted); font-size:14px}
+ 
+/* Footer */
+footer.site{padding:40px 0 80px 0; color:var(--muted); text-align:center}
+ 
+/* Instagram list */
+.instagram-list{display:grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap:16px;}
+.ig-card{
+  position:relative;
+  border:1px solid rgba(255,255,255,.08); background:var(--glass); padding:18px; border-radius:16px;
+  display:flex; align-items:center; gap:14px;
+  transform:translateY(14px); opacity:0; transition:.35s;
 }
-.theme-toggle:focus-visible { box-shadow: var(--ring); outline: none; }
-
-/* --- Burger --- */
-.burger {
-  appearance: none;
-  border: 1px solid rgba(255,255,255,.08);
-  background: var(--surface);
-  color: var(--text);
-  width: 48px; height: 44px;
-  border-radius: 12px;
-  display: grid; place-items: center;
-  cursor: pointer;
+.ig-card.show{transform:translateY(0);opacity:1}
+.ig-card .handle{font-weight:700}
+.ig-card .open{margin-left:auto; padding:8px 12px; border:1px solid rgba(255,255,255,.12); border-radius:10px}
+.ig-card:hover{background:rgba(255,255,255,.12)}
+ 
+/* “pola–pola” glow senka na hover */
+.ig-card::before{
+  content:""; position:absolute; inset:-2px; border-radius:inherit;
+  background:linear-gradient(90deg, var(--accent) 0 50%, var(--accent-2) 50% 100%);
+  filter:blur(18px); opacity:0; z-index:-1; transition:.35s;
 }
-.burger:focus-visible { box-shadow: var(--ring); outline: none; }
-.burger-bar {
-  display: block;
-  width: 22px; height: 2px;
-  background: var(--text);
-  border-radius: 2px;
-  margin: 3px 0;
+.ig-card:hover::before{opacity:.55}
+ 
+.ig-card img{
+  width:56px;height:56px;
+  border-radius:50%;
+  object-fit:cover;
+  background:#fff;
+  border:2px solid rgba(255,255,255,.25);
 }
-
-/* --- Nav --- */
-.nav {
-  position: fixed;
-  inset: calc(env(safe-area-inset-top) + 64px) 16px auto 16px;
-  top: 72px;
-  background: var(--surface);
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: var(--radius);
-  padding: 12px;
-  transform: translateY(-12px);
-  opacity: 0; pointer-events: none;
-  transition: opacity .18s ease, transform .18s ease;
+ 
+/* Sub hero */
+.hero.sub{height:52vh; place-items:end; padding-bottom:64px}
+.breadcrumb{color:var(--muted)}
+/* === Globalna stabilnost i safe-area === */
+html, body { overflow-x: hidden; }
+body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+ 
+/* iOS dynamic toolbar friendly visina za hero (svh umesto vh) */
+@supports (height: 100svh) {
+  .hero { height: 100svh; }
+  .hero.sub { min-height: 60svh; }
 }
-.nav.open {
-  opacity: 1; pointer-events: auto; transform: translateY(0);
+ 
+/* Respectuj “notch”/safe-area na iPhone-u */
+header.site { 
+  inset: calc(12px + env(safe-area-inset-top)) 
+         calc(12px + env(safe-area-inset-right)) 
+         auto 
+         calc(12px + env(safe-area-inset-left));
 }
-.nav ul {
-  list-style: none; padding: 0; margin: 0;
-  display: grid; gap: 10px;
+ 
+/* Fluidna tipografija za naslove – manje skokova između uređaja */
+h1 { font-size: clamp(28px, 6vw, 64px); }
+h2 { font-size: clamp(24px, 4.6vw, 40px); }
+ 
+/* Form inputi ≥16px da iOS ne zumira */
+input, textarea, select { font-size: 16px; }
+ 
+/* Slike uvek “contain” u krugovima i karticama */
+.ig-card img { width: 56px; height: 56px; object-fit: cover; }
+ 
+/* === Breakpoint 1200↓: malo veća širina kontejnera da “diše” na tabletima === */
+@media (max-width: 1200px) {
+  .container { width: min(96%, 1100px); }
 }
-.nav a {
-  display: block;
-  text-decoration: none;
-  color: var(--text);
-  background: var(--elev);
-  border: 1px solid rgba(255,255,255,.08);
-  padding: 12px 14px;
-  border-radius: 12px;
-  min-height: 44px;
+ 
+/* === Breakpoint 960↓: header kompresija, reflow navigacije, mreže === */
+@media (max-width: 960px) {
+  header.site { padding: 8px 10px; }
+  .brand img { width: 34px; height: 34px; }
+  .nav { gap: 8px; flex-wrap: wrap; }
+  .nav a { padding: 8px 12px; }
+  #theme-toggle { padding: 6px 10px; }
+  .section { padding: 56px 0; }
+  .grid.cards { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
 }
-.nav a[aria-current="page"] { outline: 2px solid color-mix(in oklab, var(--brand) 60%, transparent); }
-.nav .btn-primary { background: linear-gradient(120deg, var(--brand), var(--brand-2)); color: #fff; border: none; }
-.only-mobile { display: block; }
-
-/* --- Desktop nav --- */
-@media (min-width: 900px) {
-  .header-row { grid-template-columns: auto 1fr auto; }
-  .burger { display: none; }
-  .nav {
-    position: static;
-    background: transparent;
-    border: 0;
-    padding: 0;
-    opacity: 1; pointer-events: auto; transform: none;
+ 
+/* === Breakpoint 720↓: stack layout, veći tap-targeti, manji insets headera === */
+@media (max-width: 720px) {
+  header.site {
+    inset: calc(10px + env(safe-area-inset-top)) 
+           calc(10px + env(safe-area-inset-right))
+           auto 
+           calc(10px + env(safe-area-inset-left));
+    border-radius: calc(var(--radius) + 4px);
   }
-  .nav ul {
-    display: flex; gap: 10px; justify-content: flex-end; align-items: center;
-  }
-  .nav a {
-    background: transparent; border: 1px solid rgba(255,255,255,.1);
-    padding: 10px 14px; border-radius: 12px;
-  }
-  .only-mobile { display: none; }
+  .brand .subtitle { display: none; } /* sačuvaj prostor */
+  .grid.cards { grid-template-columns: 1fr; }
+  .instagram-list { grid-template-columns: 1fr; }
+  .ig-card { padding: 14px; }
+  .ig-card img { width: 52px; height: 52px; }
+  .floating-price { right: 14px; bottom: 14px; padding: 12px 16px; }
 }
-
-/* --- Buttons --- */
-.btn, .btn-primary, .btn-pill {
-  display: inline-flex; align-items: center; justify-content: center;
-  text-decoration: none; cursor: pointer;
-  min-height: 44px; padding: 10px 16px; border-radius: 12px;
-  border: 1px solid rgba(255,255,255,.12);
-  background: var(--surface); color: var(--text);
-}
-.btn-primary { background: linear-gradient(120deg, var(--brand), var(--brand-2)); border: none; color: #fff; }
-.btn-primary.lg { padding: 14px 22px; border-radius: 16px; }
-.btn-pill { border-radius: 999px; }
-.btn:focus-visible, .btn-primary:focus-visible, .btn-pill:focus-visible { outline: none; box-shadow: var(--ring); }
-
-/* --- Content --- */
-.content { padding: 32px 0 64px; }
-.hero { padding: 24px 0 8px; }
-.hero h1 { font-size: clamp(28px, 4vw, 42px); margin: 0 0 6px; }
-.hero p { color: var(--muted); margin: 0 0 16px; }
-
-.cards h2 { margin: 24px 0 6px; font-size: 24px; }
-.muted { color: var(--muted); }
-
-.card-list {
-  display: grid; gap: 12px; margin-top: 12px;
-}
-.card {
-  display: grid; grid-template-columns: auto 1fr auto; align-items: center;
-  gap: 12px;
-  background: var(--surface);
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: var(--radius);
-  padding: 12px;
-}
-.card .avatar {
-  width: 48px; height: 48px; border-radius: 50%;
-  background: var(--elev);
-}
-
-/* Contact form */
-.form {
-  display: grid; gap: 12px; margin-top: 12px;
-  background: var(--surface); border: 1px solid rgba(255,255,255,.08);
-  border-radius: var(--radius); padding: 16px;
-}
-.form label span { display: block; margin-bottom: 6px; color: var(--muted); font-size: 14px; }
-input, textarea {
-  width: 100%; background: var(--elev); color: var(--text);
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: 10px; padding: 12px;
-}
-input:focus, textarea:focus { outline: none; box-shadow: var(--ring); }
-
-/* --- Footer --- */
-.site-footer {
-  border-top: 1px solid rgba(255,255,255,.06);
-  padding-top: 14px; padding-bottom: calc(16px + env(safe-area-inset-bottom));
-  background: color-mix(in oklab, var(--bg) 90%, transparent);
-}
-.foot-row {
-  display: flex; gap: 12px; align-items: center; justify-content: space-between;
-}
-small { color: var(--muted); }
-
-/* --- Motion reduce --- */
-@media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; }
+ 
+/* === Breakpoint 480↓: maksimalna kompaktnost bez kršenja layouta === */
+@media (max-width: 480px) {
+  .nav a { padding: 7px 10px; }
+  .brand img { width: 30px; height: 30px; }
+  .hero-logo img { width: min(220px, 70vw); }
+  .card { padding: 16px; }
+  .price-card { padding: 18px; }
 }
