@@ -21,18 +21,15 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// Dark / Light toggle (globalno, logo opcionalan)
+// Dark / Light toggle (globalno)
 document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.getElementById('theme-toggle');
-  const logo = document.getElementById('site-logo'); // može da ne postoji
-
   const saved = localStorage.getItem('theme') || 'dark';
 
   function applyTheme(theme){
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
     if (toggle) toggle.textContent = theme === 'light' ? '🌙' : '☀️';
-    if (logo)  logo.src = theme === 'light' ? 'assets/logo-light.png' : 'assets/logo-dark.png';
   }
 
   applyTheme(saved);
