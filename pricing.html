@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="sr">
+<html lang="sr" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,9 +10,10 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 <header class="site">
   <div class="brand">
-    <img src="assets/logo.png" alt="MAVIC logo" onerror="this.style.display='none'">
+    <img id="site-logo" src="assets/logo-dark.png" alt="MAVIC logo" onerror="this.style.display='none'">
     <div>
       <div class="title">MAVIC</div>
       <div class="subtitle">Fitness & Lifestyle</div>
@@ -23,6 +24,8 @@
     <a href="index.html#lokacije">Lokacije</a>
     <a href="pricing.html">Cenovnik</a>
     <a href="contact.html">Kontakt</a>
+    <!-- Dodato toggle dugme -->
+    <button id="theme-toggle">☀️</button>
   </nav>
 </header>
 
@@ -60,13 +63,18 @@
       <p class="small">Mala grupa ili 1-na-1 • Paketi dostupni</p>
     </div>
   </div>
-  <p class="small" style="margin-top:18px">* Cene informativne. Tačne informacije o paketima i popustima dobijate na prijemnom desku odabrane lokacije.</p>
+  <p class="small" style="margin-top:18px">
+    * Cene informativne. Tačne informacije o paketima i popustima dobijate na prijemnom desku odabrane lokacije.
+  </p>
 </main>
 
 <footer class="site">
   © <span id="year"></span> MAVIC • Sva prava zadržana
 </footer>
+
 <script src="script.js"></script>
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
