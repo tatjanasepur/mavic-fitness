@@ -174,3 +174,72 @@ footer.site{padding:40px 0 80px 0; color:var(--muted); text-align:center}
 /* Sub hero */
 .hero.sub{height:52vh; place-items:end; padding-bottom:64px}
 .breadcrumb{color:var(--muted)}
+/* === Globalna stabilnost i safe-area === */
+html, body { overflow-x: hidden; }
+body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+
+/* iOS dynamic toolbar friendly visina za hero (svh umesto vh) */
+@supports (height: 100svh) {
+  .hero { height: 100svh; }
+  .hero.sub { min-height: 60svh; }
+}
+
+/* Respectuj “notch”/safe-area na iPhone-u */
+header.site { 
+  inset: calc(12px + env(safe-area-inset-top)) 
+         calc(12px + env(safe-area-inset-right)) 
+         auto 
+         calc(12px + env(safe-area-inset-left));
+}
+
+/* Fluidna tipografija za naslove – manje skokova između uređaja */
+h1 { font-size: clamp(28px, 6vw, 64px); }
+h2 { font-size: clamp(24px, 4.6vw, 40px); }
+
+/* Form inputi ≥16px da iOS ne zumira */
+input, textarea, select { font-size: 16px; }
+
+/* Slike uvek “contain” u krugovima i karticama */
+.ig-card img { width: 56px; height: 56px; object-fit: cover; }
+
+/* === Breakpoint 1200↓: malo veća širina kontejnera da “diše” na tabletima === */
+@media (max-width: 1200px) {
+  .container { width: min(96%, 1100px); }
+}
+
+/* === Breakpoint 960↓: header kompresija, reflow navigacije, mreže === */
+@media (max-width: 960px) {
+  header.site { padding: 8px 10px; }
+  .brand img { width: 34px; height: 34px; }
+  .nav { gap: 8px; flex-wrap: wrap; }
+  .nav a { padding: 8px 12px; }
+  #theme-toggle { padding: 6px 10px; }
+  .section { padding: 56px 0; }
+  .grid.cards { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+}
+
+/* === Breakpoint 720↓: stack layout, veći tap-targeti, manji insets headera === */
+@media (max-width: 720px) {
+  header.site {
+    inset: calc(10px + env(safe-area-inset-top)) 
+           calc(10px + env(safe-area-inset-right))
+           auto 
+           calc(10px + env(safe-area-inset-left));
+    border-radius: calc(var(--radius) + 4px);
+  }
+  .brand .subtitle { display: none; } /* sačuvaj prostor */
+  .grid.cards { grid-template-columns: 1fr; }
+  .instagram-list { grid-template-columns: 1fr; }
+  .ig-card { padding: 14px; }
+  .ig-card img { width: 52px; height: 52px; }
+  .floating-price { right: 14px; bottom: 14px; padding: 12px 16px; }
+}
+
+/* === Breakpoint 480↓: maksimalna kompaktnost bez kršenja layouta === */
+@media (max-width: 480px) {
+  .nav a { padding: 7px 10px; }
+  .brand img { width: 30px; height: 30px; }
+  .hero-logo img { width: min(220px, 70vw); }
+  .card { padding: 16px; }
+  .price-card { padding: 18px; }
+}
